@@ -1,0 +1,12 @@
+@host = http://192.168.114.128:9200
+
+
+POST {{host}}/just_testing_logs/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "message": "Just logging",
+    "service": "Awesome App",
+    "elapsed_milliseconds": {{$randomInt 1000 10000}},
+    "datetime": "{{$datetime iso8601}}"
+}

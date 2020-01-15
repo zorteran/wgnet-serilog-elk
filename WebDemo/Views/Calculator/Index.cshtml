@@ -1,0 +1,44 @@
+﻿@model WebDemo.ViewModels.Calculator.OperationViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    string result = Model.Result.HasValue ? Model.Result.Value.ToString("0.####") : "";
+}
+
+<h1>Elo Calculator</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstNumber" class="control-label"></label>
+                <input asp-for="FirstNumber" class="form-control" />
+                <span asp-validation-for="FirstNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondNumber" class="control-label"></label>
+                <input asp-for="SecondNumber" class="form-control" />
+                <span asp-validation-for="SecondNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group btn-group-vertical">
+                <input type="submit" value="Add" class="btn btn-primary" formaction="/Calculator/Add" />
+                <input type="submit" value="Sub" class="btn btn-secondary" formaction="/Calculator/Sub" />
+                <input type="submit" value="Multi" class="btn btn-warning" formaction="/Calculator/Multi" />
+                <input type="submit" value="Div" class="btn btn-danger" formaction="/Calculator/Div" />
+                <input type="submit" value="RemoteMulti" class="btn btn-warning" formaction="/Calculator/RemoteMulti" />
+                <input type="submit" value="RemoteDiv" class="btn btn-danger" formaction="/Calculator/RemoteDiv" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            Score: @result
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,51 @@
+@host = http://192.168.114.128:9200
+
+
+POST {{host}}/just_testing_witcher/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Geralt",
+    "profession" : "Witcher",
+    "school" : "Wolf"
+}
+
+###
+POST {{host}}/just_testing_witcher/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Letho",
+    "profession" : "Witcher",
+    "school" : "Viper"
+}
+
+###
+
+POST {{host}}/just_testing_witcher/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Yennefer",
+    "profession" : "Mage"
+}
+
+###
+
+POST {{host}}/just_testing_witcher/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Jaskier",
+    "profession" : "Bard"
+}
+
+###
+
+POST {{host}}/just_testing_witcher/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Triss",
+    "profession" : "Mage"
+}

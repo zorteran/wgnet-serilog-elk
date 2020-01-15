@@ -1,0 +1,80 @@
+@host = http://192.168.114.128:9200
+
+PUT {{host}}/just_testing_trams
+Content-Type: application/json
+
+{
+  "mappings": {
+    "properties": {
+      "location": {
+        "type": "geo_point"
+      }
+    }
+  }
+}
+
+###
+POST {{host}}/just_testing_trams/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "line": "20",
+    "datetime": "{{$datetime iso8601}}",
+    "location":"52.252876,20.904123"
+}
+
+###
+POST {{host}}/just_testing_trams/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "line": "20",
+    "vehicle": "123",
+    "datetime": "{{$datetime iso8601}}",
+    "location": {
+        "lat":52.252876,
+        "lon":20.904123
+        }
+}
+
+###
+POST {{host}}/just_testing_trams/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "line": "20",
+    "vehicle": "123",
+    "datetime": "{{$datetime iso8601}}",
+    "location":[ 52.252886, 20.904133]
+}
+
+###
+POST {{host}}/just_testing_trams/_doc/?pretty HTTP/1.1
+content-type: application/json
+
+{
+    "line": "21",
+    "vehicle": "123",
+    "datetime": "{{$datetime iso8601}}",
+    "location": "52.252876, 20.904123"
+}
+
+###
+
+POST {{host}}/just_testing_trams/_bulk?refresh HTTP/1.1
+content-type: application/json
+
+{"index":{}}
+{"location": "52.374081,4.912350", "name": "NEMO Science Museum"}
+{"index":{}}
+{"location": "52.369219,4.901618", "name": "Museum Het Rembrandthuis"}
+{"index":{}}
+{"location": "52.371667,4.914722", "name": "Nederlands Scheepvaartmuseum"}
+{"index":{}}
+{"location": "51.222900,4.405200", "name": "Letterenhuis"}
+{"index":{}}
+{"location": "48.861111,2.336389", "name": "Musée du Louvre"}
+{"index":{}}
+{"location": "48.860000,2.327000", "name": "Musée d'Orsay"}
+
+###

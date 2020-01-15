@@ -1,0 +1,17 @@
+@host = http://192.168.114.128:9200
+
+PUT {{host}}/ztm
+Content-Type: application/json
+
+{
+  "mappings": {
+    "properties": {
+      "location": {
+        "type": "geo_point"
+      },
+      "time": {
+        "type": "date" 
+      }
+    }
+  }
+}
