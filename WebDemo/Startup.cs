@@ -32,10 +32,8 @@ namespace WebDemo
             services.AddDbContext<AwesomeDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("YyyyContext")));
 
-            services.AddSingleton<AwesomeLoggerConfig>(Configuration.GetSection("AwesomeLoggerConfig").Get<AwesomeLoggerConfig>());
 
             services.AddScoped<ICalculatorService, CalculatorService>();
-            services.AddScoped<IAwesomeLogger, AwesomeLogger>();
 
             services.AddHttpClient<IRemoteCalculatorClient, RemoteCalculatorClient>();
 
@@ -44,14 +42,15 @@ namespace WebDemo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //app.UseExceptionHandler("/Error");
+            //}
+            app.UseAwesomeErrorPage();
 
             app.UseStaticFiles();
 
@@ -60,6 +59,7 @@ namespace WebDemo
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseLogEnrichment();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

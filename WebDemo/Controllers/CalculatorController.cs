@@ -3,7 +3,9 @@ using AwesomeServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using WebDemo.ViewModels;
 using WebDemo.ViewModels.Calculator;
 
 namespace WebDemo.Controllers
@@ -12,15 +14,12 @@ namespace WebDemo.Controllers
     {
         private readonly ICalculatorService _calculatorService;
         private readonly ILogger<CalculatorController> _logger;
-        private readonly IAwesomeLogger _awesomeLogger;
 
         public CalculatorController(ICalculatorService calculatorService,
-                                    ILogger<CalculatorController> logger,
-                                    IAwesomeLogger awesomeLogger)
+                                    ILogger<CalculatorController> logger)
         {
             _calculatorService = calculatorService;
             _logger = logger;
-            _awesomeLogger = awesomeLogger;
         }
         public ActionResult Index()
         {
@@ -30,10 +29,6 @@ namespace WebDemo.Controllers
         public async Task<IActionResult> Add(OperationViewModel operation)
         {
             _logger.BeginScope("Wow, CalculatorController");
-            //var log = CreateAwesomeLog("Such action. Adding time!");
-            //log.UserName = this.User.Identity.Name;
-            //log.AdditionalInfo.Add("user", this.User.Identity);
-            //_awesomeLogger.WriteUsage(log);
 
             _logger.LogInformation("Such action. Adding time!");
             operation.Result = await _calculatorService.Add(operation.FirstNumber, operation.SecondNumber);
@@ -70,22 +65,5 @@ namespace WebDemo.Controllers
             return View("Index", operation);
         }
 
-        private AwesomeLog CreateAwesomeLog(string message)
-        {
-            return new AwesomeLog
-            {
-                Message = message,
-                Location = nameof(CalculatorController),
-            };
-        }
-        private AwesomeLog CreateAwesomeErrorLog(string message, Exception ex)
-        {
-            return new AwesomeLog
-            {
-                Message = message,
-                Exception = ex,
-                Location = nameof(CalculatorController),
-            };
-        }
     }
 }
